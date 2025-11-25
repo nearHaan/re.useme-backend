@@ -9,20 +9,29 @@ export interface IUser extends Document {
 }
 
 /*
+{
+userid: 12345
 data: {
-  '1234:PersonalInfo': {
-    '1234:name': 'Farhaan',
-    '1234:age': 20,
-  },
-  '5677:Experience': [
+  '5677': [
     {
-      '1234:title': 'CEO',
-      '567':company' : 'Facebook',
+      '1234': 'CEO',
+      '567hghg ' : 'Facebook',
     },
     {
       '1234:title': 'CEO',
       '567':company' : 'Facebook',
     }
-  ]
+  ],
+  '5677': [
+    {
+      '1234': 'CEO',
+      '567hghg ' : 'Facebook',
+    },
+    {
+      '1234:title': 'CEO',
+      '567':company' : 'Facebook',
+    }
+  ],
 }
+  }
 */
