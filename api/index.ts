@@ -6,3 +6,4 @@ export const POST = serverless(app);
 export const PUT = serverless(app);
 export const PATCH = serverless(app);
 export const DELETE = serverless(app);
+export const OPTIONS = serverless(app);
