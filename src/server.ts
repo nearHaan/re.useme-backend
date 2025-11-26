@@ -13,11 +13,16 @@ const app = express() as Express;
 
 const allowedOrgins = ["http://localhost:5173", "https://reuseme.vercel.app"];
 const corsOptions = {
-  origin: allowedOrgins,
+  origin: (orgin: string | undefined, callback: Function) => {
+    if (!orgin) return callback(null, true);
+    if (allowedOrgins.includes(orgin)) return callback(null, true);
+    return callback(new Error("Invalid orgin"));
+  },
   credentials: true,
 };
 
 app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
 
