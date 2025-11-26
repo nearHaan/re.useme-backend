@@ -31,12 +31,10 @@ export const registerUser = async (req: Request, res: Response) => {
       name: saveUser._id,
     });
     res.cookie("refreshToken", refreshToken, cookieOptions);
-    return res
-      .status(201)
-      .json({
-        user: { id: saveUser._id, name: saveUser.name, email: saveUser.email },
-        accessToken,
-      });
+    return res.status(201).json({
+      user: { id: saveUser._id, name: saveUser.name, email: saveUser.email },
+      accessToken,
+    });
   } catch (err: any) {
     console.log("Error Code: ", err.code);
     if (err.code === 11000) {
@@ -77,7 +75,7 @@ export const loginUser = async (req: Request, res: Response) => {
     });
     res.cookie("refreshToken", refreshToken, cookieOptions);
     return res
-      .status(201)
+      .status(200)
       .json({ user: { name: user.name, email: user.email }, accessToken });
   } catch (err: any) {
     return res
