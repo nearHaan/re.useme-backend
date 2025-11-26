@@ -7,9 +7,11 @@ const PORT = process.env.PORT || 3000;
 const startup = async () => {
   await connectDB();
 
-  app.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}`);
-  });
+  if (!process.env.PRODUCTION) {
+    app.listen(PORT, () => {
+      console.log(`Server running at http://localhost:${PORT}`);
+    });
+  }
 };
 startup();
 export default app;
