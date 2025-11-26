@@ -19,6 +19,14 @@ const corsOptions = {
     return callback(new Error("Invalid orgin"));
   },
   credentials: true,
+  methods: ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: [
+    "Content-Type",
+    "Authorization",
+    "X-Requested-With",
+    "Accept",
+  ],
+  optionsSuccessStatus: 200,
 };
 
 app.use(cors(corsOptions));
