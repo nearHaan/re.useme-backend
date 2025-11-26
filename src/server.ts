@@ -3,12 +3,18 @@ import cookieParser from "cookie-parser";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import indexRoutes from "./routes/index.js";
+import cors from "cors";
 
 dotenv.config();
 
 const PORT = process.env.PORT || 3000;
 
 const app = express();
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 app.use(express.json());
 app.use(cookieParser());
 
