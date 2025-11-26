@@ -36,8 +36,3 @@ export const addComponent = async (req: Request, res: Response) => {
     });
   }
 };
-
-// title: { type: String },
-//   desc: { type: String },
-//   type: { type: String, enum: ["single", "list"], default: "single" },
-//   rank: { type: Number, default: 0 },
