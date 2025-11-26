@@ -1,22 +1,15 @@
 import mongoose from "mongoose";
 import app from "./app.js";
+import { connectDB } from "./lib/db.js";
 
 const PORT = process.env.PORT || 3000;
 
 async () => {
-  await mongoose
-    .connect(process.env.DB_URL as string)
-    .then(async () => {
-      console.log("Connected to database successfully");
-      if (!process.env.PRODUCTION) {
-        app.listen(PORT, () => {
-          console.log(`Server running on http://localhost:${PORT}`);
-        });
-      }
-    })
-    .catch((err) => {
-      console.log("Error: ", err);
-    });
+  await connectDB();
+
+  app.listen(3000, () => {
+    console.log(`Server running at http://localhost:${PORT}`);
+  });
 };
 
 export default app;
