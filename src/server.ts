@@ -4,12 +4,12 @@ import { connectDB } from "./lib/db.js";
 
 const PORT = process.env.PORT || 3000;
 
-async () => {
+const startup = async () => {
   await connectDB();
 
   app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
   });
 };
-
+startup();
 export default app;
