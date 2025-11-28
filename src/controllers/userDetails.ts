@@ -11,20 +11,14 @@ export const updateUserDetails = async (
   const userId = req.user?.id;
 
   try {
-    const userData = await UserData.findOne({ userId: userId });
-    let newData: any = userData?.data || {};
-
-    newData[key] = data;
-
-    const updated = await UserData.updateOne(
+    const update = await UserData.findOneAndUpdate(
       { userId: userId },
-      { $set: { data: newData } },
-      { upsert: true }
+      { $set: { [`data.${key}`]: data } },
+      { upsert: true, new: true }
     );
-
     return res.status(200).json({
       success: true,
-      data: updated,
+      data: update,
     });
   } catch (err: any) {
     console.error("Error: ", err);
