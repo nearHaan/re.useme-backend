@@ -28,7 +28,7 @@ export const registerUser = async (req: Request, res: Response) => {
 
     const saveUser = await newUser.save();
     const { accessToken, refreshToken } = generateToken({
-      name: saveUser._id,
+      id: saveUser._id,
     });
     res.cookie("refreshToken", refreshToken, cookieOptions);
     return res.status(201).json({
@@ -71,7 +71,7 @@ export const loginUser = async (req: Request, res: Response) => {
     }
 
     const { accessToken, refreshToken } = generateToken({
-      name: user._id,
+      id: user._id,
     });
     res.cookie("refreshToken", refreshToken, cookieOptions);
     return res

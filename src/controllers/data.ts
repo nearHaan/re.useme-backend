@@ -1,6 +1,8 @@
-import type { Request, Response } from "express";
+import type { Response } from "express";
 import TemplateComponent from "../models/templateComponentModel.js";
 import TemplateSubComponent from "../models/templateSubComponentModel.js";
+import type { AuthenticatedRequest } from "../lib/types.js";
+import UserData from "../models/userDataModel.js";
 
 interface SubComp {
   title: string;
@@ -18,8 +20,12 @@ interface TemplateEntry {
 }
 
 // TODO: Make this query efficient. Currently O(n)
-export const getDataTemplate = async (req: Request, res: Response) => {
+export const getDataTemplate = async (
+  req: AuthenticatedRequest,
+  res: Response
+) => {
   let dataObj: Record<string, TemplateEntry> = {};
+  const userId = req.user?.id;
   try {
     console.log("dataform...");
     const components = await TemplateComponent.find({}).sort({
@@ -53,9 +59,11 @@ export const getDataTemplate = async (req: Request, res: Response) => {
         };
       }
     }
+
+    const user = await UserData.findOne({ userId: userId });
     res.status(200).json({
       template: dataObj,
-      userDetails: {},
+      userDetails: user?.data || {},
     });
   } catch (err: any) {
     res.status(500).json({ error: err });

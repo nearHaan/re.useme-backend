@@ -11,16 +11,16 @@ export const generateToken = (payload: object) => {
 };
 
 export const verifyToken = (token: string) => {
-  return new Promise((resolve) => {
+  return new Promise<any | null>((resolve) => {
     jwt.verify(token, JWT_SECRET, (err, decoded) => {
-      if (err) return resolve("");
+      if (err) return resolve(null);
       resolve(decoded);
     });
   });
 };
 
 export const verifyRefreshToken = (token: string) => {
-  return new Promise((resolve) => {
+  return new Promise<any | null>((resolve) => {
     jwt.verify(token, REFRESH_SECRET, (err, decoded) => {
       if (err) return resolve("");
       resolve(decoded);
